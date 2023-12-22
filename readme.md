@@ -21,13 +21,12 @@ Contains all test cases and testing functionality.
 ## TestGraphs
 Contains a number of graph pairs to test with.
 For each graph pair there are three files:
-<name>_G1.gexf, <name>_G2.gexf, and <name>.png.
+(*name*)_G1.gexf, (*name*)_G2.gexf, and (*name*).png.
 The two gexf files are XML type files for storing the two graphs.
 They can be viewed and edited with any text editor.
 There is also the PNG, which is a figure of both graphs and the difference graph, of ease of viewing.
 
 # Dependencies
-NetworkX: `pip install networkx`
-MatPlotLib: `pip install matplotlib`
-(Maybe) PyTest: `pip install pytest`
-> If you're using a VEnv, you need Pytest
+- NetworkX: `pip install networkx`
+- MatPlotLib: `pip install matplotlib`
+- PyTest: `pip install pytest`

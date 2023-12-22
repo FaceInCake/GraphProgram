@@ -1,8 +1,33 @@
-03 Feb, 2023
 
-Modified the HavelHakimi.py code to HavelHakimiAM.py code to read input from a file 
+## GraphIO
+Contains several functions for input and output of graph objects.
+There's a convenience save and load function, which just uses `gexf`.
 
-This version displays all the intermediate graphs; we just don't know wahich is the last one. 
-This can be fixed by commenting out the line 92 in  myHHFunction:  displayGraph(G) 
+There's also a `display_graphs` function which can take a number of graphs
+and use the graphs' attributes for modifying the displayed graph, like 'color'.
 
-This code requires Python3. Tu run typein the following line on a prompt: python3 HavelHakimi.py
+## Deprecated
+Contains no longer used code that is kept for archiving purposes
+
+## Graphing
+Contains several functions for applying higher level filtering or parsing of graph objects.
+
+## Main
+Is modified frequently to run different portions of code.
+
+## test_main
+Contains all test cases and testing functionality.
+
+## TestGraphs
+Contains a number of graph pairs to test with.
+For each graph pair there are three files:
+<name>_G1.gexf, <name>_G2.gexf, and <name>.png.
+The two gexf files are XML type files for storing the two graphs.
+They can be viewed and edited with any text editor.
+There is also the PNG, which is a figure of both graphs and the difference graph, of ease of viewing.
+
+# Dependencies
+NetworkX: `pip install networkx`
+MatPlotLib: `pip install matplotlib`
+(Maybe) PyTest: `pip install pytest`
+> If you're using a VEnv, you need Pytest

@@ -12,7 +12,7 @@ class Test_construct_graph (unittest.TestCase):
     def standard_test (self, msg, degreeSequence:list[int], nodeLabels:list|None=None):
         G = construct_graph(degreeSequence, nodeLabels=nodeLabels)
         self.assertIsNotNone(G, msg)
-        self.assertEquals(
+        self.assertEqual(
             G.number_of_nodes(), len(degreeSequence),
             "Number of nodes of graph should match length of degree sequence"
         )
@@ -23,7 +23,7 @@ class Test_construct_graph (unittest.TestCase):
         # (This is because the degrees of G could be in any order compared to the one given)
         GD = list(dict(G.degree).values())
         for deg, count in degMap.items():
-            self.assertEquals(
+            self.assertEqual(
                 count, GD.count(deg),
                 "Degree sequence of graph doesnt match the one given"
             )
@@ -151,16 +151,16 @@ class Test_traverse_alternating_cycle (unittest.TestCase):
                 cycle = traverse_alternating_cycle(CG, start)
                 for u,v in pairwise(cycle+[start]):
                     EG.remove_edge(u, v)
-                self.assertEquals(
+                self.assertEqual(
                     len(expected), len(cycle),
                     f"Cycle found '{cycle}' should have same length as one expected '{expected}'"
                 )
-                self.assertEquals(
+                self.assertEqual(
                     0, len(EG.edges),
                     f"Cycle found '{cycle}' is missing edges '{EG.edges}' from expected '{expected}'"
                 )
                 for (u1,v1), (_,v2) in pairwise(pairwise(cycle+cycle[:2])):
-                    self.assertNotEquals(
+                    self.assertNotEqual(
                         (c := CG[u1][v1]['color']),
                         CG[v1][v2]['color'],
                         f"Two adjoining edges have the same colour '{c}' when they shouldn't"

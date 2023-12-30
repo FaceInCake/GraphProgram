@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2023-12-25">
+    <creator>NetworkX 3.2.1</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="G1">
+    <nodes>
+      <node id="a" label="a" />
+      <node id="b" label="b" />
+      <node id="c" label="c" />
+      <node id="d" label="d" />
+      <node id="e" label="e" />
+      <node id="f" label="f" />
+      <node id="g" label="g" />
+      <node id="h" label="h" />
+      <node id="i" label="i" />
+      <node id="j" label="j" />
+      <node id="k" label="k" />
+      <node id="l" label="l" />
+    </nodes>
+    <edges>
+      <edge source="a" target="l" id="0" />
+      <edge source="a" target="d" id="1" />
+      <edge source="a" target="h" id="2" />
+      <edge source="a" target="c" id="3" />
+      <edge source="a" target="g" id="4" />
+      <edge source="a" target="b" id="5" />
+      <edge source="a" target="j" id="6" />
+      <edge source="a" target="f" id="7" />
+      <edge source="a" target="k" id="8" />
+      <edge source="a" target="e" id="9" />
+      <edge source="a" target="i" id="10" />
+      <edge source="b" target="l" id="11" />
+      <edge source="b" target="d" id="12" />
+      <edge source="b" target="h" id="13" />
+      <edge source="b" target="c" id="14" />
+      <edge source="b" target="g" id="15" />
+      <edge source="b" target="j" id="16" />
+      <edge source="c" target="d" id="17" />
+      <edge source="c" target="h" id="18" />
+      <edge source="c" target="i" id="19" />
+      <edge source="c" target="f" id="20" />
+      <edge source="d" target="e" id="21" />
+      <edge source="d" target="f" id="22" />
+      <edge source="d" target="g" id="23" />
+      <edge source="e" target="h" id="24" />
+      <edge source="e" target="f" id="25" />
+      <edge source="e" target="k" id="26" />
+      <edge source="f" target="j" id="27" />
+      <edge source="g" target="j" id="28" />
+      <edge source="g" target="i" id="29" />
+      <edge source="h" target="i" id="30" />
+      <edge source="i" target="k" id="31" />
+    </edges>
+  </graph>
+</gexf>

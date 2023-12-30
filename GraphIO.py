@@ -1,7 +1,8 @@
 
 from itertools import chain
 import matplotlib.pyplot as plt
-from networkx import Graph, circular_layout, bipartite_layout, spring_layout, draw as draw_graph, read_gexf, write_gexf
+from networkx import Graph, circular_layout, bipartite_layout, spring_layout, draw_networkx_edge_labels, \
+    draw as draw_graph, read_gexf, write_gexf
 
 
 def display_graphs (*graphs:Graph, labels:list[str]|None=None):
@@ -41,11 +42,14 @@ def display_graphs (*graphs:Graph, labels:list[str]|None=None):
     elif rows > 1 and cols > 1:
         axes = [i for i in chain(*axes)]
     for i in range(len(graphs)):
+        layout = get_layout(i)
         draw_graph(
-            graphs[i], pos=get_layout(i), ax=axes[i], with_labels=True,
+            graphs[i], pos=layout, ax=axes[i], with_labels=True,
             node_color=nodeColours[i], node_size=nodeSizes[i], labels=graphs[i].graph.get('labels',None),
             edge_color=edgeColours[i], style=edgeStyles[i], font_weight='bold'
         )
+        if (edgeLabels := {(u,v) : graphs[i][u][v].get('label','') for u,v in graphs[i].edges}):
+            draw_networkx_edge_labels(graphs[i], layout, edgeLabels, ax=axes[i])
         if (graphName := graphs[i].graph.get('name', '')) != "":
             axes[i].set_title(graphName)
     if labels is not None:

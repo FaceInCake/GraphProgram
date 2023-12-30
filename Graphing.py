@@ -1,7 +1,8 @@
 
 from typing import Hashable, Sequence, Iterable
 from random import randint
-from networkx import Graph, empty_graph, difference
+from itertools import pairwise
+from networkx import Graph, DiGraph, empty_graph, difference
 
 NodeType = Hashable
 EdgeType = tuple[NodeType, NodeType]
@@ -31,6 +32,12 @@ def construct_graph (degreeSequence:Sequence[int], *, nodeLabels:Sequence[NodeTy
             nodeDegrees[i] = (nodeDegrees[i][0], nodeDegrees[i][1] - 1)
         nodeDegrees.sort(key=lambda x:x[1], reverse=True)
     return G
+
+def create_cycle_graph (cycle:list[NodeType]) -> DiGraph:
+    CG :DiGraph = empty_graph(cycle, DiGraph)
+    for i, (u,v) in enumerate(pairwise(cycle + [cycle[0]])):
+        CG.add_edge(u, v, label=(i+1))
+    return CG
 
 def get_difference_graph (G1:Graph, G2:Graph) -> Graph:
     """Returns a graph where every edge has a 'color' attribute where:

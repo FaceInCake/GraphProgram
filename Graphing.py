@@ -35,6 +35,7 @@ def construct_graph (degreeSequence:Sequence[int], *, nodeLabels:Sequence[NodeTy
 
 def create_cycle_graph (cycle:list[NodeType]) -> DiGraph:
     CG :DiGraph = empty_graph(cycle, DiGraph)
+    if len(cycle)==0: return CG
     for i, (u,v) in enumerate(pairwise(cycle + [cycle[0]])):
         CG.add_edge(u, v, label=(i+1))
     return CG
@@ -75,51 +76,18 @@ def get_components (G:Graph) -> Iterable[list[NodeType]]:
             componentCount += 1
             if len(notVisited)==0: return
 
-def traverse_alternating_cycle (_AG :Graph, start :NodeType) -> list[NodeType]:
-    AG = _AG.copy()
-    subCycles :list[list[NodeType]] = []
-    intersections :list[NodeType] = []
-    intersectionI :int = 0
-    cycle :list[NodeType] = [ start ]
-    # openEdges :Graph = create_empty_copy(AG)
-    curColor :str = ""
-    # Find all connected nodes, break when no more open edges
-    while True:
-        # Explore all connected nodes in a single path until cycle found
-        while True:
-            # Explore all neighbors
-            nextNode :NodeType = None
-            neighbors = list(AG.neighbors(cycle[-1]))
-            if len(neighbors) > 2: intersections.append(cycle[-1])
-            for n2 in neighbors:
-                edge = AG[cycle[-1]][n2]
-                edgeColour = edge.get('color','')
-                if edgeColour != curColor:
-                    nextNode = n2
-                    curColor = edgeColour
-                    break
-            if nextNode is None:
-                if len(cycle) > 1:
-                    subCycles.append(list(cycle[:-1]))
-                cycle.clear()
-                break
-            AG.remove_edge(cycle[-1], nextNode)
-            cycle.append(nextNode)
-        if intersectionI >= len(intersections):
-            break
-        cycle = [ intersections[intersectionI] ]
-        intersectionI += 1
-        curColor = ""
-    if len(subCycles) == 0:
+def combine_alternating_cycles (G:Graph, cycles :list[list[NodeType]]) -> list[NodeType]:
+    "Assumes the first cycle is the parent and the rest touch the parent at index 0, this function combines them into one alternating cycle"
+    if len(cycles) == 0:
         return []
-    parent = subCycles[0]
-    for subCycle in subCycles[1:]:
+    parent = cycles[0]
+    for subCycle in cycles[1:]:
         centre = subCycle[0]
         i = parent.index(centre)
-        entryColourSub = _AG[subCycle[-1]][centre]['color']
-        exitColourSub = _AG[centre][subCycle[1]]['color']
-        entryColourParent = _AG[parent[i-1]][centre]['color']
-        exitColourParent = _AG[centre][parent[(i+1)%len(parent)]]['color']
+        entryColourSub = G[subCycle[-1]][centre]['color']
+        exitColourSub = G[centre][subCycle[1]]['color']
+        entryColourParent = G[parent[i-1]][centre]['color']
+        exitColourParent = G[centre][parent[(i+1)%len(parent)]]['color']
         if entryColourParent != exitColourSub:
             assert entryColourSub != exitColourParent
             parent = parent[:i] + subCycle + parent[i:]
@@ -129,10 +97,34 @@ def traverse_alternating_cycle (_AG :Graph, start :NodeType) -> list[NodeType]:
             parent = parent[:i+1] + list(reversed(subCycle)) + parent[i+1:]
     return parent
 
+def traverse_alternating_cycle (_AG :Graph, _start :NodeType) -> list[list[NodeType]]:
+    AG = _AG.copy()
+    subCycles :list[list[NodeType]] = []
+    cycleStarts :list[NodeType] = [ _start ]
+    # Find all connected nodes, break when no more open edges
+    for start in cycleStarts:
+        cycle :list[NodeType] = [ start ]
+        curColor :str = ""
+        # Explore all connected nodes in a single path until cycle found
+        while len(candidates := [
+            n for n in AG.neighbors(cycle[-1])
+            if  AG.has_edge(cycle[-1], n)
+            and AG[cycle[-1]][n].get('color','black') != curColor
+        ]) != 0:
+            if len(candidates) > 1:
+                cycleStarts.append(cycle[-1])
+            curColor = AG[cycle[-1]][candidates[0]].get('color','black')
+            AG.remove_edge(cycle[-1], candidates[0])
+            cycle.append(candidates[0])
+        if len(cycle) > 1: subCycles.append(cycle[:-1])
+    return subCycles
+
 def find_alternating_cycles (G1:Graph, G2:Graph) -> list[list[NodeType]]:
-    CG = get_difference_graph(G1, G2)
-    components = list(get_components(CG))
+    DG = get_difference_graph(G1, G2)
+    components = list(get_components(DG))
     return [
-        traverse_alternating_cycle(CG, next(iter(c)))
-        for c in components if len(c) >= 4
+        combine_alternating_cycles(DG,
+            traverse_alternating_cycle(DG, next(iter(c)))
+        )
+        for c in components
     ]

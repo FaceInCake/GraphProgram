@@ -76,55 +76,78 @@ def get_components (G:Graph) -> Iterable[list[NodeType]]:
             componentCount += 1
             if len(notVisited)==0: return
 
-def combine_alternating_cycles (G:Graph, cycles :list[list[NodeType]]) -> list[NodeType]:
-    "Assumes the first cycle is the parent and the rest touch the parent at index 0, this function combines them into one alternating cycle"
-    if len(cycles) == 0:
-        return []
-    parent = cycles[0]
-    for subCycle in cycles[1:]:
-        centre = subCycle[0]
-        i = parent.index(centre)
-        entryColourSub = G[subCycle[-1]][centre]['color']
-        exitColourSub = G[centre][subCycle[1]]['color']
-        entryColourParent = G[parent[i-1]][centre]['color']
-        exitColourParent = G[centre][parent[(i+1)%len(parent)]]['color']
-        if entryColourParent != exitColourSub:
-            assert entryColourSub != exitColourParent
-            parent = parent[:i] + subCycle + parent[i:]
-        else:
-            assert entryColourParent != entryColourSub
-            assert exitColourParent != exitColourSub
-            parent = parent[:i+1] + list(reversed(subCycle)) + parent[i+1:]
-    return parent
-
-def traverse_alternating_cycle (_AG :Graph, _start :NodeType) -> list[list[NodeType]]:
-    AG = _AG.copy()
-    subCycles :list[list[NodeType]] = []
-    cycleStarts :list[NodeType] = [ _start ]
-    # Find all connected nodes, break when no more open edges
-    for start in cycleStarts:
-        cycle :list[NodeType] = [ start ]
-        curColor :str = ""
-        # Explore all connected nodes in a single path until cycle found
-        while len(candidates := [
-            n for n in AG.neighbors(cycle[-1])
-            if  AG.has_edge(cycle[-1], n)
-            and AG[cycle[-1]][n].get('color','black') != curColor
-        ]) != 0:
-            if len(candidates) > 1:
-                cycleStarts.append(cycle[-1])
-            curColor = AG[cycle[-1]][candidates[0]].get('color','black')
-            AG.remove_edge(cycle[-1], candidates[0])
-            cycle.append(candidates[0])
-        if len(cycle) > 1: subCycles.append(cycle[:-1])
-    return subCycles
-
 def find_alternating_cycles (G1:Graph, G2:Graph) -> list[list[NodeType]]:
+    "Returns a list of alternating cycles, always starting from an edge *to be added*"
+    cycles :list[list[NodeType]] = []
+    toAdd :Graph = difference(G2, G1)
+    toRemove :Graph = difference(G1, G2)
+    nodes = list(G1.nodes)
+    while nodes and (start := nodes.pop()):
+        cycle :list[NodeType] = [ start ]
+        colour :Graph = True
+        curGraph = toAdd
+        while candidates := [
+            n for n in curGraph.neighbors(cycle[-1])
+        ]:
+            curGraph.remove_edge(cycle[-1], candidates[0])
+            cycle.append(candidates[0])
+            if candidates[0] in nodes: nodes.remove(candidates[0])
+            curGraph = toRemove if colour else toAdd
+            colour = not colour
+        if len(cycle) > 1: cycles.append(cycle[:-1])
+    return cycles
+
+def swap_edges (G:Graph, edge1:EdgeType, edge2:EdgeType):
+    G.remove_edge(edge1[0], edge1[1])
+    G.remove_edge(edge2[0], edge2[1])
+    G.add_edge(edge1[0], edge2[0])
+    G.add_edge(edge1[1], edge2[1])
+
+def find_edge_swaps (_G1:Graph, G2:Graph) -> list[tuple[EdgeType,EdgeType]]:
+    G1 = _G1.copy()
     DG = get_difference_graph(G1, G2)
-    components = list(get_components(DG))
-    return [
-        combine_alternating_cycles(DG,
-            traverse_alternating_cycle(DG, next(iter(c)))
-        )
-        for c in components
-    ]
+
+    def find_valid_nodes(edges:list[NodeType,NodeType,str]) -> tuple[EdgeType, EdgeType, str, str]:
+        for e2, e3, c23 in edges:
+            DG.remove_edge(e2, e3)
+            for e1 in list(DG.neighbors(e2)):
+                if DG[e2][e1]['color'] == c23: continue
+                for e4 in DG.neighbors(e3):
+                    if e4 != e1 \
+                    and DG[e2][e1]['color'] == DG[e3][e4]['color'] \
+                    and (
+                        not DG.has_edge(e1, e4)
+                        or DG[e1][e4]['color'] == c23
+                    ):
+                        return e1, e2, e3, e4, c23
+            DG.add_edge(e2, e3, color=c23)
+        raise RuntimeError("Unable to find a valid swap, even though one should always exist")
+
+    def find_valid_swap ():
+        edges = list(DG.edges.data('color'))
+        if len(edges) == 0: return []
+        E1, E2, E3, E4, C23 = find_valid_nodes(edges)
+        DG.remove_edge(E1, E2)
+        DG.remove_edge(E3, E4)
+        if DG.has_edge(E1, E4):
+            DG.remove_edge(E1, E4)
+            edgeSwap = ((E1,E2), (E4,E3)) if C23 == 'green' else ((E2,E3), (E1,E4))
+            swap_edges(G1, *edgeSwap)
+            return [edgeSwap] + find_valid_swap()
+        else:
+            if C23 == 'green':
+                DG.add_edge(E1, E4, color='red')
+                edgeSwap = ((E1,E2), (E4,E3))
+                if not G1.has_edge(E1, E4):
+                    swap_edges(G1, *edgeSwap)
+                    return [edgeSwap] + find_valid_swap()
+                return find_valid_swap() + [edgeSwap]
+            else: # red
+                DG.add_edge(E1, E4, color='green')
+                edgeSwap = ((E2,E3), (E1,E4))
+                if G1.has_edge(E1, E4):
+                    swap_edges(G1, *edgeSwap)
+                    return [edgeSwap] + find_valid_swap()
+                return find_valid_swap() + [edgeSwap]
+
+    return find_valid_swap()

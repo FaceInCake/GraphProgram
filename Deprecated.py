@@ -1,6 +1,8 @@
 
+from itertools import combinations_with_replacement
 from typing import TypeVar, Hashable
-from networkx import Graph, DiGraph, complete_graph, difference, compose, simple_cycles, connected_components
+from networkx import Graph, DiGraph, complete_graph, difference, compose, simple_cycles, connected_components, \
+    is_valid_degree_sequence_erdos_gallai as is_valid_degree_sequence
 
 NodeType = Hashable
 
@@ -149,3 +151,34 @@ def find_alternating_cycles_0 (CG:Graph) -> tuple[list[NodeType], ...]:
     return tuple(
         get_cycle(c) for c in components if len(c) >= 4
     )
+
+def combine_alternating_cycles (G:Graph, cycles :list[list[NodeType]]) -> list[NodeType]:
+    "Assumes the first cycle is the parent and the rest touch the parent at index 0, this function combines them into one alternating cycle"
+    if len(cycles) == 0:
+        return []
+    parent = cycles[0]
+    for subCycle in cycles[1:]:
+        centre = subCycle[0]
+        i = parent.index(centre)
+        entryColourSub = G[subCycle[-1]][centre]['color']
+        exitColourSub = G[centre][subCycle[1]]['color']
+        entryColourParent = G[parent[i-1]][centre]['color']
+        exitColourParent = G[centre][parent[(i+1)%len(parent)]]['color']
+        if entryColourParent != exitColourSub:
+            assert entryColourSub != exitColourParent
+            parent = parent[:i] + subCycle + parent[i:]
+        else:
+            assert entryColourParent != entryColourSub
+            assert exitColourParent != exitColourSub
+            parent = parent[:i+1] + list(reversed(subCycle)) + parent[i+1:]
+    return parent
+
+def generate_degree_sequences(upToLength:int, startFrom:int=2):
+    with open("DegreeSequences.txt", 'w') as fout:
+        fout.writelines(
+            ",".join(str(i) for i in seq)+"\n"
+            for L in range(startFrom, upToLength+1)
+            for seq in combinations_with_replacement(range(L-1,0,-1), L)
+            if sum(seq) % 2 == 0
+            if is_valid_degree_sequence(seq)
+        )

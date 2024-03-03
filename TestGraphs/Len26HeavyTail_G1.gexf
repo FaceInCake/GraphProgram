@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2024-03-03">
+    <creator>NetworkX 3.2.1</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="G1">
+    <nodes>
+      <node id="a" label="a" />
+      <node id="b" label="b" />
+      <node id="c" label="c" />
+      <node id="d" label="d" />
+      <node id="e" label="e" />
+      <node id="f" label="f" />
+      <node id="g" label="g" />
+      <node id="h" label="h" />
+      <node id="i" label="i" />
+      <node id="j" label="j" />
+      <node id="k" label="k" />
+      <node id="l" label="l" />
+      <node id="m" label="m" />
+      <node id="n" label="n" />
+      <node id="o" label="o" />
+      <node id="p" label="p" />
+      <node id="q" label="q" />
+      <node id="r" label="r" />
+      <node id="s" label="s" />
+      <node id="t" label="t" />
+      <node id="u" label="u" />
+      <node id="v" label="v" />
+      <node id="w" label="w" />
+      <node id="x" label="x" />
+      <node id="y" label="y" />
+      <node id="z" label="z" />
+    </nodes>
+    <edges>
+      <edge source="a" target="u" id="0" />
+      <edge source="a" target="g" id="1" />
+      <edge source="a" target="l" id="2" />
+      <edge source="a" target="h" id="3" />
+      <edge source="a" target="t" id="4" />
+      <edge source="a" target="e" id="5" />
+      <edge source="a" target="v" id="6" />
+      <edge source="a" target="w" id="7" />
+      <edge source="a" target="q" id="8" />
+      <edge source="a" target="n" id="9" />
+      <edge source="a" target="z" id="10" />
+      <edge source="a" target="p" id="11" />
+      <edge source="a" target="x" id="12" />
+      <edge source="a" target="i" id="13" />
+      <edge source="a" target="d" id="14" />
+      <edge source="a" target="b" id="15" />
+      <edge source="a" target="f" id="16" />
+      <edge source="a" target="k" id="17" />
+      <edge source="a" target="r" id="18" />
+      <edge source="b" target="u" id="19" />
+      <edge source="b" target="g" id="20" />
+      <edge source="b" target="l" id="21" />
+      <edge source="b" target="h" id="22" />
+      <edge source="b" target="t" id="23" />
+      <edge source="b" target="e" id="24" />
+      <edge source="b" target="x" id="25" />
+      <edge source="b" target="i" id="26" />
+      <edge source="b" target="k" id="27" />
+      <edge source="c" target="l" id="28" />
+      <edge source="c" target="t" id="29" />
+      <edge source="c" target="x" id="30" />
+      <edge source="c" target="d" id="31" />
+      <edge source="c" target="o" id="32" />
+      <edge source="c" target="j" id="33" />
+      <edge source="d" target="g" id="34" />
+      <edge source="d" target="l" id="35" />
+      <edge source="d" target="t" id="36" />
+      <edge source="d" target="v" id="37" />
+      <edge source="d" target="p" id="38" />
+      <edge source="d" target="r" id="39" />
+      <edge source="f" target="w" id="40" />
+      <edge source="f" target="z" id="41" />
+      <edge source="f" target="m" id="42" />
+      <edge source="f" target="s" id="43" />
+      <edge source="g" target="l" id="44" />
+      <edge source="h" target="s" id="45" />
+      <edge source="i" target="l" id="46" />
+      <edge source="i" target="v" id="47" />
+      <edge source="i" target="p" id="48" />
+      <edge source="i" target="r" id="49" />
+      <edge source="j" target="r" id="50" />
+      <edge source="k" target="x" id="51" />
+      <edge source="k" target="o" id="52" />
+      <edge source="l" target="s" id="53" />
+      <edge source="l" target="x" id="54" />
+      <edge source="m" target="n" id="55" />
+      <edge source="m" target="z" id="56" />
+      <edge source="m" target="s" id="57" />
+      <edge source="m" target="y" id="58" />
+      <edge source="o" target="s" id="59" />
+      <edge source="s" target="t" id="60" />
+      <edge source="s" target="v" id="61" />
+      <edge source="s" target="z" id="62" />
+      <edge source="v" target="x" id="63" />
+    </edges>
+  </graph>
+</gexf>

@@ -1,4 +1,5 @@
 
+from math import sqrt, floor, ceil
 from itertools import chain
 import matplotlib.pyplot as plt
 from networkx import Graph, circular_layout, bipartite_layout, spring_layout, draw_networkx_edge_labels, \
@@ -31,11 +32,15 @@ def display_graphs (*graphs:Graph, labels:list[str]|None=None):
                 halfNodes = [n for n,c in graphs[i].nodes(data='color') if c == firstColour]
                 return bipartite_layout(graphs[i], halfNodes, align='horizontal')
         return spring_layout(graphs[i])
-    LEN_TO_GRID :dict[int,tuple[int,int]] = {
-        1:(1,1), 2:(1,2), 3:(1,3), 4:(2,2),
-        5:(2,3), 6:(2,3), 7:(2,4), 8:(2,4)
-    }
-    rows, cols = LEN_TO_GRID[len(graphs)]
+    rows, cols = floor(sqrt(len(graphs))), ceil(sqrt(len(graphs)))
+    if rows * cols < len(graphs): cols += 1
+    # LEN_TO_GRID :dict[int,tuple[int,int]] = {
+    #      1:(1,1),  2:(1,2),  3:(1,3),  4:(2,2),  5:(2,3),  6:(2,3),  7:(2,4),  8:(2,4),
+    #      9:(3,3), 10:(3,4), 11:(3,4), 12:(3,4), 13:(3,5), 14:(3,5), 15:(3,5), 16:(4,4),
+    #     17:(4,5), 18:(4,5), 19:(4,5), 20:(4,5), 21:(4,6), 22:(4,6), 23:(4,6), 24:(4,6),
+    #     25:(5,5), 26:(4,7), 27:(4,7), 28:(4,7), 29:(5,6), 30:(5,6), 31:(5,7), 32:(5,7)
+    # }
+    # rows, cols = LEN_TO_GRID[len(graphs)]
     _, axes = plt.subplots(nrows=rows, ncols=cols)
     if rows == 1 and cols == 1:
         axes = [axes]

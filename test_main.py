@@ -4,8 +4,11 @@ from typing import Iterable
 from collections import defaultdict
 from itertools import pairwise, chain
 from GraphIO import load_graphs
-from Graphing import NodeType, construct_graph, get_difference_graph, get_components, traverse_alternating_cycle, find_alternating_cycles
+from Graphing import NodeType, construct_graph, get_difference_graph, get_components, \
+    find_alternating_cycles, swap_edges, find_edge_swaps
+from Deprecated import traverse_alternating_graph
 import networkx as nx
+
 
 class Test_construct_graph (unittest.TestCase):
 
@@ -148,23 +151,17 @@ class Test_traverse_alternating_cycle (unittest.TestCase):
         for i, start in enumerate(expected):
             with self.subTest(i=i, start=start):
                 EG = ExpG.copy()
-                cycle = traverse_alternating_cycle(CG, start)
-                for u,v in pairwise(cycle+[start]):
-                    EG.remove_edge(u, v)
-                self.assertEqual(
-                    len(expected), len(cycle),
-                    f"Cycle found '{cycle}' should have same length as one expected '{expected}'"
-                )
-                self.assertEqual(
-                    0, len(EG.edges),
-                    f"Cycle found '{cycle}' is missing edges '{EG.edges}' from expected '{expected}'"
-                )
-                for (u1,v1), (_,v2) in pairwise(pairwise(cycle+cycle[:2])):
-                    self.assertNotEqual(
-                        (c := CG[u1][v1]['color']),
-                        CG[v1][v2]['color'],
-                        f"Two adjoining edges have the same colour '{c}' when they shouldn't"
-                    )
+                cycles = traverse_alternating_graph(CG, start)
+                for cycle in cycles:
+                    for u,v in pairwise(cycle+[cycle[0]]):
+                        EG.remove_edge(u, v)
+                    for (u1,v1), (_,v2) in pairwise(pairwise(cycle+cycle[:2])):
+                        self.assertNotEqual(
+                            (c := CG[u1][v1]['color']),
+                            CG[v1][v2]['color'],
+                            f"Two adjoining edges have the same colour '{c}' when they shouldn't"
+                        )
+                self.assertEqual(EG.number_of_edges(), 0, "There were some edges expected that werent found")
 
     def test_square (self): self.standard_test("Square", list("bced"))
 
@@ -245,7 +242,83 @@ class Test_find_alternating_cycles (unittest.TestCase):
         G1, G2 = load_graphs("Square")
         self.standard_test(G1, G2, [list("bced")])
 
+class Test_find_edge_swaps (unittest.TestCase):
 
+    def standard_test (self, G1:nx.Graph, G2:nx.Graph):
+        swaps = find_edge_swaps(G1, G2)
+        for i, (e1, e2) in enumerate(swaps):
+            with self.subTest(i=i, swapA=e1, swapB=e2):
+                self.assertNotEqual(e1[0], e1[1], "Invalid edge swap")
+                self.assertNotEqual(e2[0], e2[1], "Invalid edge swap")
+                self.assertNotEqual(e1[0], e2[0], "Invalid edge swap")
+                self.assertNotEqual(e1[1], e2[1], "Invalid edge swap")
+                self.assertTrue(G1.has_edge(*e1), "source graph does not contain edge 1 when it should")
+                self.assertTrue(G1.has_edge(*e2), "source graph does not contain edge 2 when it should")
+                self.assertFalse(G1.has_edge(e1[0], e2[0]), "source graph contains edge e11-e21 when it shouldNT")
+                self.assertFalse(G1.has_edge(e1[1], e2[1]), "source graph contains edge e12-e22 when it shouldNT")
+                swap_edges(G1, e1, e2)
+        with self.subTest('FinalCheck'):
+            self.assertEqual(G1.edges, G2.edges, "After applying the edge swaps, G1 and G2 should now be the same, but they werent")
+
+    def test_square (self):
+        G1, G2 = load_graphs("Square")
+        self.standard_test(G1, G2)
+    def test_same (self):
+        G1, G2 = load_graphs("Same")
+        self.standard_test(G1, G2)
+    def test_hourlgass (self):
+        G1, G2 = load_graphs("Hourglass")
+        self.standard_test(G1, G2)
+    def test_hexagon (self):
+        G1, G2 = load_graphs("Hexagon")
+        self.standard_test(G1, G2)
+    def test_figureeight (self):
+        G1, G2 = load_graphs("FigureEight")
+        self.standard_test(G1, G2)
+    def test_ears (self):
+        G1, G2 = load_graphs("Ears")
+        self.standard_test(G1, G2)
+    def test_crown (self):
+        G1, G2 = load_graphs("Crown")
+        self.standard_test(G1, G2)
+    def test_bird (self):
+        G1, G2 = load_graphs("Bird")
+        self.standard_test(G1, G2)
+    def test_pineapple (self):
+        G1, G2 = load_graphs("Pineapple")
+        self.standard_test(G1, G2)
+    def test_three_squares (self):
+        G1, G2 = load_graphs("ThreeSquares")
+        self.standard_test(G1, G2)
+    def test_two_components (self):
+        G1, G2 = load_graphs("TwoComponents")
+        self.standard_test(G1, G2)
+    def test_web (self):
+        G1, G2 = load_graphs("Web")
+        self.standard_test(G1, G2)
+    def test_size12 (self):
+        G1, G2 = load_graphs("Size12")
+        self.standard_test(G1, G2)
+    def test_len26_dense (self):
+        G1, G2 = load_graphs("Len26Dense")
+        self.standard_test(G1, G2)
+    def test_len26_sparse (self):
+        G1, G2 = load_graphs("Len26Sparse")
+        self.standard_test(G1, G2)
+    def test_len26_medium (self):
+        G1, G2 = load_graphs("Len26Medium")
+        self.standard_test(G1, G2)
+    def test_len26_heavytail (self):
+        G1, G2 = load_graphs("Len26HeavyTail")
+        self.standard_test(G1, G2)
+
+
+    # def test_all_premade_graphs (self):
+    #     graphs = [fn[11:-4] for fn in glob("TestGraphs/*.png")]
+    #     for graph in graphs:
+    #         with self.subTest(graph=graph):
+    #             G1, G2 = load_graphs(graph)
+    #             self.standard_test(G1, G2)
 
 
 if __name__ == "__main__":

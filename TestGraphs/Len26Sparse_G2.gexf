@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2024-03-03">
+    <creator>NetworkX 3.2.1</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="G2">
+    <nodes>
+      <node id="a" label="a" />
+      <node id="b" label="b" />
+      <node id="c" label="c" />
+      <node id="d" label="d" />
+      <node id="e" label="e" />
+      <node id="f" label="f" />
+      <node id="g" label="g" />
+      <node id="h" label="h" />
+      <node id="i" label="i" />
+      <node id="j" label="j" />
+      <node id="k" label="k" />
+      <node id="l" label="l" />
+      <node id="m" label="m" />
+      <node id="n" label="n" />
+      <node id="o" label="o" />
+      <node id="p" label="p" />
+      <node id="q" label="q" />
+      <node id="r" label="r" />
+      <node id="s" label="s" />
+      <node id="t" label="t" />
+      <node id="u" label="u" />
+      <node id="v" label="v" />
+      <node id="w" label="w" />
+      <node id="x" label="x" />
+      <node id="y" label="y" />
+      <node id="z" label="z" />
+    </nodes>
+    <edges>
+      <edge source="c" target="v" id="0" />
+      <edge source="c" target="i" id="1" />
+      <edge source="e" target="m" id="2" />
+      <edge source="g" target="y" id="3" />
+      <edge source="m" target="w" id="4" />
+      <edge source="n" target="y" id="5" />
+      <edge source="r" target="s" id="6" />
+      <edge source="t" target="x" id="7" />
+    </edges>
+  </graph>
+</gexf>

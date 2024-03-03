@@ -1,0 +1,352 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2024-03-03">
+    <creator>NetworkX 3.2.1</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="G1">
+    <nodes>
+      <node id="a" label="a" />
+      <node id="b" label="b" />
+      <node id="c" label="c" />
+      <node id="d" label="d" />
+      <node id="e" label="e" />
+      <node id="f" label="f" />
+      <node id="g" label="g" />
+      <node id="h" label="h" />
+      <node id="i" label="i" />
+      <node id="j" label="j" />
+      <node id="k" label="k" />
+      <node id="l" label="l" />
+      <node id="m" label="m" />
+      <node id="n" label="n" />
+      <node id="o" label="o" />
+      <node id="p" label="p" />
+      <node id="q" label="q" />
+      <node id="r" label="r" />
+      <node id="s" label="s" />
+      <node id="t" label="t" />
+      <node id="u" label="u" />
+      <node id="v" label="v" />
+      <node id="w" label="w" />
+      <node id="x" label="x" />
+      <node id="y" label="y" />
+      <node id="z" label="z" />
+    </nodes>
+    <edges>
+      <edge source="a" target="g" id="0" />
+      <edge source="a" target="e" id="1" />
+      <edge source="a" target="k" id="2" />
+      <edge source="a" target="m" id="3" />
+      <edge source="a" target="n" id="4" />
+      <edge source="a" target="p" id="5" />
+      <edge source="a" target="q" id="6" />
+      <edge source="a" target="s" id="7" />
+      <edge source="a" target="t" id="8" />
+      <edge source="a" target="b" id="9" />
+      <edge source="a" target="d" id="10" />
+      <edge source="a" target="f" id="11" />
+      <edge source="a" target="h" id="12" />
+      <edge source="a" target="i" id="13" />
+      <edge source="a" target="l" id="14" />
+      <edge source="a" target="o" id="15" />
+      <edge source="a" target="r" id="16" />
+      <edge source="a" target="u" id="17" />
+      <edge source="a" target="w" id="18" />
+      <edge source="a" target="x" id="19" />
+      <edge source="a" target="y" id="20" />
+      <edge source="a" target="z" id="21" />
+      <edge source="a" target="c" id="22" />
+      <edge source="a" target="v" id="23" />
+      <edge source="b" target="g" id="24" />
+      <edge source="b" target="t" id="25" />
+      <edge source="b" target="l" id="26" />
+      <edge source="b" target="q" id="27" />
+      <edge source="b" target="x" id="28" />
+      <edge source="b" target="h" id="29" />
+      <edge source="b" target="c" id="30" />
+      <edge source="b" target="y" id="31" />
+      <edge source="b" target="s" id="32" />
+      <edge source="b" target="e" id="33" />
+      <edge source="b" target="o" id="34" />
+      <edge source="b" target="z" id="35" />
+      <edge source="b" target="r" id="36" />
+      <edge source="b" target="u" id="37" />
+      <edge source="b" target="k" id="38" />
+      <edge source="b" target="m" id="39" />
+      <edge source="b" target="v" id="40" />
+      <edge source="b" target="n" id="41" />
+      <edge source="b" target="p" id="42" />
+      <edge source="b" target="j" id="43" />
+      <edge source="b" target="w" id="44" />
+      <edge source="b" target="d" id="45" />
+      <edge source="b" target="f" id="46" />
+      <edge source="c" target="g" id="47" />
+      <edge source="c" target="t" id="48" />
+      <edge source="c" target="l" id="49" />
+      <edge source="c" target="q" id="50" />
+      <edge source="c" target="x" id="51" />
+      <edge source="c" target="h" id="52" />
+      <edge source="c" target="e" id="53" />
+      <edge source="c" target="k" id="54" />
+      <edge source="c" target="m" id="55" />
+      <edge source="c" target="n" id="56" />
+      <edge source="c" target="p" id="57" />
+      <edge source="c" target="s" id="58" />
+      <edge source="c" target="d" id="59" />
+      <edge source="c" target="f" id="60" />
+      <edge source="c" target="i" id="61" />
+      <edge source="c" target="o" id="62" />
+      <edge source="c" target="r" id="63" />
+      <edge source="c" target="u" id="64" />
+      <edge source="c" target="w" id="65" />
+      <edge source="c" target="y" id="66" />
+      <edge source="c" target="z" id="67" />
+      <edge source="d" target="g" id="68" />
+      <edge source="d" target="t" id="69" />
+      <edge source="d" target="l" id="70" />
+      <edge source="d" target="q" id="71" />
+      <edge source="d" target="x" id="72" />
+      <edge source="d" target="h" id="73" />
+      <edge source="d" target="y" id="74" />
+      <edge source="d" target="s" id="75" />
+      <edge source="d" target="e" id="76" />
+      <edge source="d" target="o" id="77" />
+      <edge source="d" target="z" id="78" />
+      <edge source="d" target="r" id="79" />
+      <edge source="d" target="u" id="80" />
+      <edge source="d" target="k" id="81" />
+      <edge source="d" target="m" id="82" />
+      <edge source="d" target="v" id="83" />
+      <edge source="d" target="w" id="84" />
+      <edge source="d" target="n" id="85" />
+      <edge source="d" target="p" id="86" />
+      <edge source="d" target="j" id="87" />
+      <edge source="d" target="i" id="88" />
+      <edge source="e" target="g" id="89" />
+      <edge source="e" target="t" id="90" />
+      <edge source="e" target="l" id="91" />
+      <edge source="e" target="q" id="92" />
+      <edge source="e" target="x" id="93" />
+      <edge source="e" target="h" id="94" />
+      <edge source="e" target="y" id="95" />
+      <edge source="e" target="s" id="96" />
+      <edge source="e" target="k" id="97" />
+      <edge source="e" target="m" id="98" />
+      <edge source="e" target="n" id="99" />
+      <edge source="e" target="p" id="100" />
+      <edge source="e" target="j" id="101" />
+      <edge source="e" target="v" id="102" />
+      <edge source="e" target="z" id="103" />
+      <edge source="e" target="f" id="104" />
+      <edge source="e" target="i" id="105" />
+      <edge source="e" target="o" id="106" />
+      <edge source="e" target="r" id="107" />
+      <edge source="e" target="u" id="108" />
+      <edge source="e" target="w" id="109" />
+      <edge source="f" target="g" id="110" />
+      <edge source="f" target="t" id="111" />
+      <edge source="f" target="l" id="112" />
+      <edge source="f" target="q" id="113" />
+      <edge source="f" target="x" id="114" />
+      <edge source="f" target="h" id="115" />
+      <edge source="f" target="y" id="116" />
+      <edge source="f" target="s" id="117" />
+      <edge source="f" target="o" id="118" />
+      <edge source="f" target="z" id="119" />
+      <edge source="f" target="r" id="120" />
+      <edge source="f" target="u" id="121" />
+      <edge source="f" target="k" id="122" />
+      <edge source="f" target="m" id="123" />
+      <edge source="f" target="v" id="124" />
+      <edge source="f" target="n" id="125" />
+      <edge source="f" target="p" id="126" />
+      <edge source="f" target="j" id="127" />
+      <edge source="f" target="w" id="128" />
+      <edge source="f" target="i" id="129" />
+      <edge source="g" target="k" id="130" />
+      <edge source="g" target="m" id="131" />
+      <edge source="g" target="n" id="132" />
+      <edge source="g" target="p" id="133" />
+      <edge source="g" target="q" id="134" />
+      <edge source="g" target="s" id="135" />
+      <edge source="g" target="t" id="136" />
+      <edge source="g" target="h" id="137" />
+      <edge source="g" target="i" id="138" />
+      <edge source="g" target="l" id="139" />
+      <edge source="g" target="o" id="140" />
+      <edge source="g" target="r" id="141" />
+      <edge source="g" target="u" id="142" />
+      <edge source="g" target="w" id="143" />
+      <edge source="g" target="x" id="144" />
+      <edge source="g" target="y" id="145" />
+      <edge source="g" target="z" id="146" />
+      <edge source="g" target="v" id="147" />
+      <edge source="g" target="j" id="148" />
+      <edge source="h" target="t" id="149" />
+      <edge source="h" target="l" id="150" />
+      <edge source="h" target="q" id="151" />
+      <edge source="h" target="x" id="152" />
+      <edge source="h" target="k" id="153" />
+      <edge source="h" target="m" id="154" />
+      <edge source="h" target="n" id="155" />
+      <edge source="h" target="p" id="156" />
+      <edge source="h" target="s" id="157" />
+      <edge source="h" target="i" id="158" />
+      <edge source="h" target="o" id="159" />
+      <edge source="h" target="r" id="160" />
+      <edge source="h" target="u" id="161" />
+      <edge source="h" target="w" id="162" />
+      <edge source="h" target="y" id="163" />
+      <edge source="h" target="z" id="164" />
+      <edge source="h" target="j" id="165" />
+      <edge source="i" target="t" id="166" />
+      <edge source="i" target="l" id="167" />
+      <edge source="i" target="q" id="168" />
+      <edge source="i" target="x" id="169" />
+      <edge source="i" target="y" id="170" />
+      <edge source="i" target="s" id="171" />
+      <edge source="i" target="o" id="172" />
+      <edge source="i" target="z" id="173" />
+      <edge source="i" target="r" id="174" />
+      <edge source="i" target="u" id="175" />
+      <edge source="i" target="k" id="176" />
+      <edge source="i" target="m" id="177" />
+      <edge source="i" target="v" id="178" />
+      <edge source="i" target="w" id="179" />
+      <edge source="i" target="n" id="180" />
+      <edge source="i" target="p" id="181" />
+      <edge source="i" target="j" id="182" />
+      <edge source="j" target="t" id="183" />
+      <edge source="j" target="q" id="184" />
+      <edge source="j" target="y" id="185" />
+      <edge source="j" target="s" id="186" />
+      <edge source="j" target="o" id="187" />
+      <edge source="j" target="z" id="188" />
+      <edge source="j" target="r" id="189" />
+      <edge source="j" target="u" id="190" />
+      <edge source="j" target="k" id="191" />
+      <edge source="j" target="m" id="192" />
+      <edge source="j" target="v" id="193" />
+      <edge source="j" target="w" id="194" />
+      <edge source="j" target="n" id="195" />
+      <edge source="j" target="p" id="196" />
+      <edge source="k" target="t" id="197" />
+      <edge source="k" target="l" id="198" />
+      <edge source="k" target="q" id="199" />
+      <edge source="k" target="x" id="200" />
+      <edge source="k" target="y" id="201" />
+      <edge source="k" target="s" id="202" />
+      <edge source="k" target="o" id="203" />
+      <edge source="k" target="z" id="204" />
+      <edge source="k" target="r" id="205" />
+      <edge source="k" target="u" id="206" />
+      <edge source="k" target="m" id="207" />
+      <edge source="k" target="n" id="208" />
+      <edge source="k" target="p" id="209" />
+      <edge source="k" target="v" id="210" />
+      <edge source="k" target="w" id="211" />
+      <edge source="l" target="t" id="212" />
+      <edge source="l" target="m" id="213" />
+      <edge source="l" target="n" id="214" />
+      <edge source="l" target="p" id="215" />
+      <edge source="l" target="q" id="216" />
+      <edge source="l" target="s" id="217" />
+      <edge source="l" target="o" id="218" />
+      <edge source="l" target="r" id="219" />
+      <edge source="l" target="u" id="220" />
+      <edge source="l" target="w" id="221" />
+      <edge source="l" target="x" id="222" />
+      <edge source="l" target="y" id="223" />
+      <edge source="l" target="z" id="224" />
+      <edge source="l" target="v" id="225" />
+      <edge source="m" target="t" id="226" />
+      <edge source="m" target="q" id="227" />
+      <edge source="m" target="x" id="228" />
+      <edge source="m" target="y" id="229" />
+      <edge source="m" target="s" id="230" />
+      <edge source="m" target="o" id="231" />
+      <edge source="m" target="z" id="232" />
+      <edge source="m" target="r" id="233" />
+      <edge source="m" target="u" id="234" />
+      <edge source="m" target="n" id="235" />
+      <edge source="m" target="p" id="236" />
+      <edge source="m" target="v" id="237" />
+      <edge source="m" target="w" id="238" />
+      <edge source="n" target="t" id="239" />
+      <edge source="n" target="q" id="240" />
+      <edge source="n" target="x" id="241" />
+      <edge source="n" target="y" id="242" />
+      <edge source="n" target="s" id="243" />
+      <edge source="n" target="o" id="244" />
+      <edge source="n" target="z" id="245" />
+      <edge source="n" target="r" id="246" />
+      <edge source="n" target="u" id="247" />
+      <edge source="n" target="v" id="248" />
+      <edge source="n" target="w" id="249" />
+      <edge source="n" target="p" id="250" />
+      <edge source="o" target="t" id="251" />
+      <edge source="o" target="q" id="252" />
+      <edge source="o" target="x" id="253" />
+      <edge source="o" target="y" id="254" />
+      <edge source="o" target="s" id="255" />
+      <edge source="o" target="p" id="256" />
+      <edge source="o" target="v" id="257" />
+      <edge source="o" target="z" id="258" />
+      <edge source="o" target="r" id="259" />
+      <edge source="o" target="u" id="260" />
+      <edge source="p" target="t" id="261" />
+      <edge source="p" target="q" id="262" />
+      <edge source="p" target="x" id="263" />
+      <edge source="p" target="y" id="264" />
+      <edge source="p" target="s" id="265" />
+      <edge source="p" target="z" id="266" />
+      <edge source="p" target="r" id="267" />
+      <edge source="p" target="u" id="268" />
+      <edge source="p" target="v" id="269" />
+      <edge source="p" target="w" id="270" />
+      <edge source="q" target="t" id="271" />
+      <edge source="q" target="s" id="272" />
+      <edge source="q" target="r" id="273" />
+      <edge source="q" target="u" id="274" />
+      <edge source="q" target="w" id="275" />
+      <edge source="q" target="x" id="276" />
+      <edge source="q" target="y" id="277" />
+      <edge source="q" target="z" id="278" />
+      <edge source="q" target="v" id="279" />
+      <edge source="r" target="t" id="280" />
+      <edge source="r" target="x" id="281" />
+      <edge source="r" target="y" id="282" />
+      <edge source="r" target="s" id="283" />
+      <edge source="r" target="z" id="284" />
+      <edge source="r" target="v" id="285" />
+      <edge source="r" target="w" id="286" />
+      <edge source="s" target="t" id="287" />
+      <edge source="s" target="x" id="288" />
+      <edge source="s" target="y" id="289" />
+      <edge source="s" target="v" id="290" />
+      <edge source="s" target="z" id="291" />
+      <edge source="s" target="u" id="292" />
+      <edge source="s" target="w" id="293" />
+      <edge source="t" target="u" id="294" />
+      <edge source="t" target="w" id="295" />
+      <edge source="t" target="x" id="296" />
+      <edge source="t" target="y" id="297" />
+      <edge source="t" target="z" id="298" />
+      <edge source="t" target="v" id="299" />
+      <edge source="u" target="x" id="300" />
+      <edge source="u" target="y" id="301" />
+      <edge source="u" target="z" id="302" />
+      <edge source="u" target="v" id="303" />
+      <edge source="u" target="w" id="304" />
+      <edge source="v" target="x" id="305" />
+      <edge source="v" target="y" id="306" />
+      <edge source="v" target="z" id="307" />
+      <edge source="v" target="w" id="308" />
+      <edge source="w" target="x" id="309" />
+      <edge source="w" target="y" id="310" />
+      <edge source="w" target="z" id="311" />
+      <edge source="x" target="y" id="312" />
+      <edge source="x" target="z" id="313" />
+    </edges>
+  </graph>
+</gexf>

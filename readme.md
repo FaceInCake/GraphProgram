@@ -13,7 +13,7 @@ Contains no longer used code that is kept for archiving purposes
 Contains several functions for applying higher level filtering or parsing of graph objects.
 
 ## Main
-Is modified frequently to run different portions of code.
+Can be run from an interactive terminal for executing different code snippets.
 
 ## test_main
 Contains all test cases and testing functionality.
@@ -29,4 +29,5 @@ There is also the PNG, which is a figure of both graphs and the difference graph
 # Dependencies
 - NetworkX: `pip install networkx`
 - MatPlotLib: `pip install matplotlib`
-- PyTest: `pip install pytest`
+- (If using a virtual environment)
+  - PyTest: `pip install pytest`

@@ -10,9 +10,9 @@ NodeType = Hashable
 def get_complete_difference_graph (G1:Graph, G2:Graph) -> Graph:
     """Returns a complete graph where every edge is one of the following:
     - red & solid = This edge must be removed
-    - green & solid = This edge must be added
+    - blue & solid = This edge must be added
     - red & dashed = The edge can be removed, but we dont want to
-    - green & dashed = The edge can be added, but we dont want to
+    - blue & dashed = The edge can be added, but we dont want to
 
     Solid lines are of weight -1, and dashed lines are of weight +1
     """
@@ -29,7 +29,7 @@ def get_complete_difference_graph (G1:Graph, G2:Graph) -> Graph:
         })
     for u,v in toBeInserted.edges:
         differenceGraph.edges[u,v].update({
-            'color': 'green',
+            'color': 'blue',
             'style': 'solid',
             'weight': -1
         })
@@ -41,7 +41,7 @@ def get_complete_difference_graph (G1:Graph, G2:Graph) -> Graph:
         })
     for u,v in difference(differenceGraph, compose(G1, G2)).edges:
         differenceGraph.edges[u,v].update({
-            'color': 'green',
+            'color': 'blue',
             'style': 'dashed',
             'weight': +1
         })
@@ -64,7 +64,7 @@ def get_edge_node_graph (DG:Graph) -> DiGraph:
     For the given graph `DG`, this function returns a *directed* graph
     where every node is an edge in `DG`, and
     every edge is an edge-to-edge in `DG`
-    where they share a node and alternate from green->red or red->green.
+    where they share a node and alternate from blue->red or red->blue.
 
     The nodes share the color/weight of the edge it represents,
     and the nodes size is 450 if it's edge is solid, 150 otherwise."""

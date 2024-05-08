@@ -77,6 +77,10 @@ def main ():
         "What algorithm would you like to test?\n(1) find_alternating_cycles\n(2) find_edge_swaps\n(3) generate_graphs\n> ",
         lambda ans: int(ans) if ans != "" else 0
     )
+    def parse_deg_seq (text)->list[int]:
+        deg = [int(s) for s in text.split()]
+        assert is_valid_degree_sequence(deg), "Invalid degree sequence"
+        return deg
     if method == 0: return
     if method == 1 or method == 2:
         ans = gather_input(
@@ -85,10 +89,6 @@ def main ():
         )
         G1, G2 = None, None
         if ans == 1:
-            def parse_deg_seq (text)->list[int]:
-                deg = [int(s) for s in text.split()]
-                assert is_valid_degree_sequence(deg), "Invalid degree sequence"
-                return deg
             degreeSequence = gather_input(
                 "Please supply a degree sequence seperated by whitespace...\n> ", parse_deg_seq
             )
@@ -141,14 +141,41 @@ def main ():
                 Gk.graph['name'] = f"G{i+1}"
                 Gk.add_edge(*swap[0], color='red', style='dashed')
                 Gk.add_edge(*swap[1], color='red', style='dashed')
-                Gk.add_edge(swap[0][0], swap[1][0], color='green', style='dashed')
-                Gk.add_edge(swap[0][1], swap[1][1], color='green', style='dashed')
+                Gk.add_edge(swap[0][0], swap[1][0], color='blue', style='dashed')
+                Gk.add_edge(swap[0][1], swap[1][1], color='blue', style='dashed')
                 graphs.append(Gk)
                 swap_edges(GN, *swap)
             GN.graph['name'] = 'GN'
             graphs.append(GN)
             display_graphs(*graphs, get_difference_graph(G1, G2))
-
+    elif method == 3:
+        ans = gather_input(
+            "How would you like to generate your graph?\n(1) Supply a degree sequence\n(2) Create a random degree sequence\n> ",
+            lambda ans: int(ans) if ans != "" else 0
+        )
+        if ans == 1:
+            degreeSequence = gather_input(
+                "Please supply a degree sequence seperated by whitespace...\n> ", parse_deg_seq
+            )
+        elif ans == 2:
+            length = gather_input(
+                "Please input length of degree sequence: ",
+                lambda ans: (i := int(ans)) and i >= 0 and i
+            )
+            edgeChance = gather_input(
+                "Optionally, input the chance for each edge, (default 0.5): ",
+                lambda ans: float(ans) if ans != "" else 0.5
+            )
+            heavyTailBias = gather_input(
+                "Optionally, input a heavy tail bias weight in [0, 1.0], (default 0): ",
+                lambda ans: float(ans) if ans != "" else 0.0
+            )
+            degreeSequence = create_degree_sequence(length, edgeChance, heavyTailBias)
+        else:
+            return
+        generate_graphs(degreeSequence)
+    else:
+        return
 
 
 if __name__ == "__main__": main()

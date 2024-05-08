@@ -45,7 +45,7 @@ def get_difference_graph (G1:Graph, G2:Graph) -> Graph:
     
     red : That edge is in G1 but not G2
     
-    green : That edge is in G2 but not G1
+    blue : That edge is in G2 but not G1
     
     There is always a cycle in this graph if G1 and G2 have the same degree sequence"""
     DG :Graph = empty_graph(G1.nodes)
@@ -55,7 +55,7 @@ def get_difference_graph (G1:Graph, G2:Graph) -> Graph:
         DG.add_edge(u, v, color='red')
     toBeInserted :Graph = difference(G2, G1)
     for u,v in toBeInserted.edges:
-        DG.add_edge(u, v, color='green')
+        DG.add_edge(u, v, color='blue')
     return DG
 
 def get_components (G:Graph) -> Iterable[list[NodeType]]:
@@ -103,9 +103,9 @@ def swap_edges (G:Graph, edge1:EdgeType, edge2:EdgeType):
     G.add_edge(edge1[0], edge2[0])
     G.add_edge(edge1[1], edge2[1])
 
-def find_edge_swaps (_G1:Graph, G2:Graph) -> list[tuple[EdgeType,EdgeType]]:
-    G1 = _G1.copy()
-    DG = get_difference_graph(G1, G2)
+def find_edge_swaps (G1:Graph, G2:Graph) -> list[tuple[EdgeType,EdgeType]]:
+    Gi = G1.copy()
+    DG = get_difference_graph(Gi, G2)
 
     def find_valid_nodes(edges:list[NodeType,NodeType,str]) -> tuple[EdgeType, EdgeType, str, str]:
         for e2, e3, c23 in edges:
@@ -131,22 +131,22 @@ def find_edge_swaps (_G1:Graph, G2:Graph) -> list[tuple[EdgeType,EdgeType]]:
         DG.remove_edge(E3, E4)
         if DG.has_edge(E1, E4):
             DG.remove_edge(E1, E4)
-            edgeSwap = ((E1,E2), (E4,E3)) if C23 == 'green' else ((E2,E3), (E1,E4))
-            swap_edges(G1, *edgeSwap)
+            edgeSwap = ((E1,E2), (E4,E3)) if C23 == 'blue' else ((E2,E3), (E1,E4))
+            swap_edges(Gi, *edgeSwap)
             return [edgeSwap] + find_valid_swap()
         else:
-            if C23 == 'green':
+            if C23 == 'blue':
                 DG.add_edge(E1, E4, color='red')
                 edgeSwap = ((E1,E2), (E4,E3))
-                if not G1.has_edge(E1, E4):
-                    swap_edges(G1, *edgeSwap)
+                if not Gi.has_edge(E1, E4):
+                    swap_edges(Gi, *edgeSwap)
                     return [edgeSwap] + find_valid_swap()
                 return find_valid_swap() + [edgeSwap]
             else: # red
-                DG.add_edge(E1, E4, color='green')
+                DG.add_edge(E1, E4, color='blue')
                 edgeSwap = ((E2,E3), (E1,E4))
-                if G1.has_edge(E1, E4):
-                    swap_edges(G1, *edgeSwap)
+                if Gi.has_edge(E1, E4):
+                    swap_edges(Gi, *edgeSwap)
                     return [edgeSwap] + find_valid_swap()
                 return find_valid_swap() + [edgeSwap]
 
